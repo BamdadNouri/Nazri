@@ -3,14 +3,13 @@
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
-# ghcr.io/n25a/nazri:add-deployments
-# ghcr.io/n25a/nazri:add-deployments
+
 image:
-  registry: "ghcr.io"
-  repository: "n25a/nazri"
+  registry: "docker.io"
+  repository: "anvari/nazri"
   name: ""
   pullPolicy: Always
-  tag: "add-deployments"
+  tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""

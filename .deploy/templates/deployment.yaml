@@ -41,9 +41,9 @@ spec:
             - name: DEFAULT_DB_PASSWORD
               value: "password"
             - name: DEFAULT_DB_HOST
-              value: "nazri-db-postgresql.nazri.svc.cluster.local"
+              value: "nazri-db-mariadb.nazri.svc.cluster.local."
             - name: DEFAULT_DB_PORT
-              value: "5432"
+              value: "3306"
             - name: ALLOWED_HOST
               value: "nazri.apps.private.okd4.teh-1.snappcloud.io"
           ports:

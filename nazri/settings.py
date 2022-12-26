@@ -100,11 +100,11 @@ REST_AUTH_SERIALIZERS = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': c.db.mysql.name,
-        'USER': c.db.mysql.user,
-        'PASSWORD': c.db.mysql.password,
-        'HOST': 'db',
-        'PORT': '3306',
+        'NAME': os.environ.get("DEFAULT_DB_NAME"),
+        'USER': os.environ.get("DEFAULT_DB_USER"),
+        'PASSWORD': os.environ.get("DEFAULT_DB_PASSWORD"),
+        'HOST': os.environ.get("DEFAULT_DB_HOST"),
+        'PORT': os.environ.get("DEFAULT_DB_PORT"),
     }
 }
 

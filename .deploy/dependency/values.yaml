@@ -1,0 +1,30 @@
+mariadb:
+  architecture: standalone
+  auth:
+    database: nazri
+    username: "nazri_app"
+    password: "password"
+
+  primary:
+    podSecurityContext:
+      enabled: false
+    containerSecurityContext:
+      enabled: false
+    persistence:
+      enabled: true
+      accessModes:
+        - ReadWriteOnce
+      size: 1Gi
+    service:
+      type: ClusterIP
+      ports:
+        mysql: 3306
+    resources:
+      limits:
+        cpu: 2
+        memory: 2Gi
+      requests:
+        cpu: 2
+        memory: 2Gi
+  serviceAccount:
+    create: false
