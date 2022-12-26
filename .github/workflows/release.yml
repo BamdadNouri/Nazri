@@ -1,46 +1,40 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-name: Create and publish a Docker image
-
+name: dockerhub-release-v3.17.3
 on:
+  # Trigger the workflow on push or pull request,
+  # but only for the master branch
   push:
-    branches: ['*']
-
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
-
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 jobs:
-  build-and-push-image:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-
+  ubuntu-bionic:
+    runs-on: ubuntu-20.04
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Log in to the Container registry
-        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+      - uses: actions/checkout@master
+      - uses: elgohr/Publish-Docker-Github-Action@master
+        env:
+          VERSION: 3.17.3
         with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          name: anvari/cmake
+          workdir: ubuntu18.04
+          buildargs: VERSION
+          tags: latest, bionic, 3, 3-bionic, 3.17, 3.17-bionic, 3.17.3, 3.17.3-bionic
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-
-      - name: Build and push Docker image
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-        with:
-          context: .
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+  alpine:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@master
+    - uses: elgohr/Publish-Docker-Github-Action@master
+      env:
+        VERSION: 3.17.3
+      with:
+        name: anvari/cmake
+        workdir: alpine3.11
+        buildargs: VERSION
+        tags: alpine, alpine3.11, 3-alpine, 3.17-alpine, 3.17.3-alpine, 3.17.3-alpine3.11
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
+        password: ${{ secrets.DOCKER_HUB_PASSWORD }}
