@@ -4,10 +4,10 @@ on:
   # but only for the master branch
   push:
     branches:
-      - master
+      - "*"
   pull_request:
     branches:
-      - master
+      - "*"
 jobs:
   ubuntu-bionic:
     runs-on: ubuntu-20.04
