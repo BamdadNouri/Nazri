@@ -18,7 +18,7 @@ jobs:
           VERSION: 3.17.3
         with:
           name: anvari/nazri
-          workdir: ubuntu18.04
+          workdir: .
           buildargs: latest
           tags: latest, bionic, 3, 3-bionic, 3.17, 3.17-bionic, 3.17.3, 3.17.3-bionic
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
